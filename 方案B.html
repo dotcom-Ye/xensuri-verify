@@ -136,63 +136,67 @@
 
     /* ===== Tagline ===== */
     .guide-tagline {
+      display: block;
       margin-top: 28px;
       text-align: center;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
-      color: #3b82f6;
+      color: #fff;
+      background: #3b82f6;
+      text-decoration: none;
+      padding: 14px 0;
+      border-radius: 12px;
       letter-spacing: 0.5px;
+      transition: all 0.2s;
     }
+    .guide-tagline:active {
+      background: #2563eb;
+      transform: scale(0.98);
+    }
+
+    /* ===== Links ===== */
+    .link-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .link-row a {
+      font-size: 12px;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .link-row a:active { color: #fff; }
 
     /* ===== Video Section ===== */
     .video-section {
       margin-top: 24px;
-      background: #111;
-      border: 1px solid #272727;
       border-radius: 14px;
-      padding: 24px;
+      overflow: hidden;
+    }
+    .video-section video {
+      display: block;
+      width: 100%;
+      border-radius: 14px;
+      background: #000;
+    }
+
+    /* ===== Trust Badge ===== */
+    .trust-badge {
       text-align: center;
-    }
-    .video-icon {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(59,130,246,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-    }
-    .video-label {
-      font-size: 14px;
-      color: #d1d5db;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .video-hint {
+      margin-top: 20px;
       font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 16px;
+      color: #525252;
     }
-    .btn-video {
-      display: inline-block;
-      padding: 12px 32px;
-      background: #3b82f6;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.2s;
-    }
-    .btn-video:active {
-      background: #2563eb;
-      transform: scale(0.98);
+    .trust-badge span {
+      color: #10b981;
     }
 
     /* ===== Footer ===== */
     .page-footer {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 10px;
       font-size: 11px;
       color: #3f3f3f;
     }
@@ -217,16 +221,10 @@
 
   <!-- Video Section -->
   <div class="video-section">
-    <div class="video-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#3b82f6" stroke="none">
-        <polygon points="5,3 19,12 5,21"/>
-      </svg>
-    </div>
-    <div class="video-label">操作视频教程</div>
-    <div class="video-hint">观看完整使用演示，确保正确操作</div>
-    <a class="btn-video" href="https://www.xensuri.com/pages/cold-therapy-support">
-      观看视频
-    </a>
+    <video controls playsinline preload="metadata" poster="视频背景.jpg">
+      <source src="安装视频.mp4" type="video/mp4">
+      您的浏览器不支持视频播放。
+    </video>
   </div>
 
   <!-- Guide Card -->
@@ -269,11 +267,20 @@
       </li>
     </ul>
 
-    <div class="guide-tagline">Reclaim Your Recovery!</div>
+    <a class="guide-tagline" href="https://www.xensuri.com">Reclaim Your Recovery!</a>
+
+    <div class="link-row">
+      <a href="https://www.xensuri.com/pages/warranty-policy">保修政策</a>
+      <a href="https://www.xensuri.com/pages/contact-us">联系客服</a>
+    </div>
+  </div>
+
+  <div class="trust-badge">
+    XENSURI 已服务 <span>10,000+</span> 康复用户
   </div>
 
   <div class="page-footer">
-    由 <span>XenSecure</span> 提供安全验证 &middot; 一次性防伪校验
+    由 <span>XenSecure</span> 提供安全验证
   </div>
 
 </div>

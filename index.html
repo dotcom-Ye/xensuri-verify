@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>正品验证 — XENSURI</title>
+  <title>冷敷治疗仪 — XENSURI</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,7 +32,7 @@
     /* ===== Loading Screen ===== */
     .loading-screen {
       text-align: center;
-      animation: fadeOut 0.4s 1.8s ease-out forwards;
+      animation: fadeOut 0.3s 1.2s ease-out forwards;
       pointer-events: none;
       position: relative;
       z-index: 10;
@@ -125,7 +125,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 16px;
-      animation: popIn 0.45s 1.8s ease-out both;
+      animation: popIn 0.35s 1.2s ease-out both;
       box-shadow: 0 0 40px rgba(5,150,105,0.15);
     }
     @keyframes popIn {
@@ -135,7 +135,7 @@
     }
     .result-icon svg {
       width: 38px; height: 38px;
-      animation: drawCheck 0.35s 2.1s ease-out both;
+      animation: drawCheck 0.3s 1.4s ease-out both;
     }
     @keyframes drawCheck {
       0% { stroke-dashoffset: 30; }
@@ -144,7 +144,7 @@
     .result-icon svg polyline {
       stroke-dasharray: 30;
       stroke-dashoffset: 30;
-      animation: drawCheck 0.35s 2.1s ease-out forwards;
+      animation: drawCheck 0.3s 1.4s ease-out forwards;
     }
 
     .result-title {
@@ -152,13 +152,13 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 6px;
-      animation: fadeUp 0.4s 1.9s ease-out both;
+      animation: fadeUp 0.4s 1.3s ease-out both;
     }
     .result-sub {
       font-size: 14px;
       color: #6b7280;
       line-height: 1.6;
-      animation: fadeUp 0.4s 2.0s ease-out both;
+      animation: fadeUp 0.4s 1.4s ease-out both;
     }
     @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(8px); }
@@ -170,13 +170,13 @@
       height: 1px;
       background: #272727;
       margin: 24px 0 20px;
-      animation: fadeUp 0.4s 2.1s ease-out both;
+      animation: fadeUp 0.4s 1.5s ease-out both;
     }
 
     /* ===== Product Info ===== */
     .info-block {
       text-align: left;
-      animation: fadeUp 0.4s 2.2s ease-out both;
+      animation: fadeUp 0.4s 1.6s ease-out both;
     }
     .info-item {
       display: flex;
@@ -219,7 +219,7 @@
     /* ===== Action Area ===== */
     .actions {
       margin-top: 24px;
-      animation: fadeUp 0.4s 2.3s ease-out both;
+      animation: fadeUp 0.4s 1.7s ease-out both;
     }
 
     .btn-primary {
@@ -255,13 +255,25 @@
     }
     .link-row a:active { color: #fff; }
 
+    /* ===== Trust Badge ===== */
+    .trust-badge {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #525252;
+      animation: fadeUp 0.4s 1.9s ease-out both;
+    }
+    .trust-badge span {
+      color: #10b981;
+    }
+
     /* ===== Footer ===== */
     .page-footer {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 10px;
       font-size: 11px;
       color: #3f3f3f;
-      animation: fadeUp 0.4s 2.4s ease-out both;
+      animation: fadeUp 0.4s 2.0s ease-out both;
     }
     .page-footer span {
       color: #525252;
@@ -322,14 +334,18 @@
           查看使用教程 &amp; 操作视频
         </a>
         <div class="link-row">
-          <a href="https://www.xensuri.com/pages/warranty-policy">延保注册</a>
+          <a href="https://www.xensuri.com/pages/warranty-policy">保修政策</a>
           <a href="https://www.xensuri.com/pages/contact-us">联系客服</a>
         </div>
       </div>
     </div>
 
+    <div class="trust-badge">
+      XENSURI 已服务 <span>10,000+</span> 康复用户
+    </div>
+
     <div class="page-footer">
-      由 <span>XenSecure</span> 提供安全验证 &middot; 一次性防伪校验
+      由 <span>XenSecure</span> 提供安全验证
     </div>
 
   </div>
@@ -341,7 +357,7 @@
     setTimeout(function() {
       var ls = document.getElementById('loadingScreen');
       if (ls) ls.style.display = 'none';
-    }, 2300);
+    }, 1500);
   })();
 </script>
 
