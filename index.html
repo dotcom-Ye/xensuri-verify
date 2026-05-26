@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>正品验证 — XENSURI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      background: url('背景.jpg') center/cover no-repeat;
+      filter: blur(6px) brightness(0.45);
+      z-index: -1;
+    }
+
+    /* ===== Loading Screen ===== */
+    .loading-screen {
+      text-align: center;
+      animation: fadeOut 0.4s 1.8s ease-out forwards;
+      pointer-events: none;
+      position: relative;
+      z-index: 10;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid rgba(255,255,255,0.12);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-screen p {
+      font-size: 13px;
+      color: #6b7280;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== Main Card ===== */
+    .app {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1;
+    }
+    .app-inner {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* ===== Security Header ===== */
+    .security-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+    .shield-icon {
+      width: 22px; height: 22px;
+    }
+    .security-header span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #9ca3af;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #272727;
+      border-radius: 20px;
+      padding: 36px 28px 28px;
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .brand-dot { color: #3b82f6; }
+    .brand .reg {
+      font-size: 11px;
+      font-weight: 400;
+      vertical-align: super;
+      color: #9ca3af;
+      margin-right: -1px;
+    }
+
+    /* ===== Verification Result ===== */
+    .result-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #064e3b, #065f46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      animation: popIn 0.45s 1.8s ease-out both;
+      box-shadow: 0 0 40px rgba(5,150,105,0.15);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      65% { transform: scale(1.12); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .result-icon svg {
+      width: 38px; height: 38px;
+      animation: drawCheck 0.35s 2.1s ease-out both;
+    }
+    @keyframes drawCheck {
+      0% { stroke-dashoffset: 30; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .result-icon svg polyline {
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+      animation: drawCheck 0.35s 2.1s ease-out forwards;
+    }
+
+    .result-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      animation: fadeUp 0.4s 1.9s ease-out both;
+    }
+    .result-sub {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.6;
+      animation: fadeUp 0.4s 2.0s ease-out both;
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Divider ===== */
+    .divider {
+      height: 1px;
+      background: #272727;
+      margin: 24px 0 20px;
+      animation: fadeUp 0.4s 2.1s ease-out both;
+    }
+
+    /* ===== Product Info ===== */
+    .info-block {
+      text-align: left;
+      animation: fadeUp 0.4s 2.2s ease-out both;
+    }
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
+    .info-item + .info-item {
+      border-top: 1px solid #1f1f1f;
+    }
+    .info-key {
+      font-size: 12px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-val {
+      font-size: 13px;
+      color: #d1d5db;
+      font-weight: 500;
+      text-align: right;
+    }
+    .info-val.mono {
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      font-size: 11px;
+      letter-spacing: 0.4px;
+      background: #111;
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #9ca3af;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .info-val.green {
+      color: #10b981;
+    }
+
+    /* ===== Action Area ===== */
+    .actions {
+      margin-top: 24px;
+      animation: fadeUp 0.4s 2.3s ease-out both;
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 15px 0;
+      background: #fff;
+      color: #0f0f0f;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:active {
+      background: #d4d4d4;
+      transform: scale(0.98);
+    }
+
+    .link-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    .link-row a {
+      font-size: 12px;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .link-row a:active { color: #fff; }
+
+    /* ===== Footer ===== */
+    .page-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11px;
+      color: #3f3f3f;
+      animation: fadeUp 0.4s 2.4s ease-out both;
+    }
+    .page-footer span {
+      color: #525252;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="spinner"></div>
+  <p>正在验证安全码…</p>
+</div>
+
+<!-- Main App -->
+<div class="app">
+  <div class="app-inner">
+
+    <!-- Security Header -->
+    <div class="security-header">
+      <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <span>产品真伪验证</span>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      <div class="brand">XENSURI<span class="reg">&reg;</span><span class="brand-dot">.</span></div>
+
+      <div class="result-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <div class="result-title">正品验证通过</div>
+      <div class="result-sub">
+        该安全码已验证为官方正品。<br>
+        您购买的是 XENSURI 官方授权产品。
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="info-block">
+        <div class="info-item">
+          <span class="info-key">产品名称</span>
+          <span class="info-val green">冷敷治疗仪</span>
+        </div>
+        <div class="info-item">
+          <span class="info-key">验证状态</span>
+          <span class="info-val green">&#9679; 已验证</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn-primary" href="方案B.html">
+          查看使用教程 &amp; 操作视频
+        </a>
+        <div class="link-row">
+          <a href="https://www.xensuri.com/pages/warranty-policy">延保注册</a>
+          <a href="https://www.xensuri.com/pages/contact-us">联系客服</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      由 <span>XenSecure</span> 提供安全验证 &middot; 一次性防伪校验
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Remove loading screen after animation completes
+    setTimeout(function() {
+      var ls = document.getElementById('loadingScreen');
+      if (ls) ls.style.display = 'none';
+    }, 2300);
+  })();
+</script>
+
+</body>
+</html>

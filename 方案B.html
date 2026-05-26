@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>使用教程 — XENSURI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      background: url('背景.jpg') center/cover no-repeat;
+      filter: blur(6px) brightness(0.45);
+      z-index: -1;
+    }
+
+    /* ===== Page Wrapper ===== */
+    .page {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Back Button ===== */
+    .back-row {
+      margin-bottom: 20px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #9ca3af;
+      text-decoration: none;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+    .back-btn:active { color: #fff; }
+    .back-btn svg {
+      width: 18px; height: 18px;
+    }
+
+    /* ===== Guide Card ===== */
+    .guide-card {
+      margin-top: 24px;
+      background: #1a1a1a;
+      border: 1px solid #272727;
+      border-radius: 20px;
+      padding: 36px 28px 32px;
+    }
+
+    .guide-brand {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .guide-brand .dot { color: #3b82f6; }
+    .guide-brand .reg {
+      font-size: 11px;
+      font-weight: 400;
+      vertical-align: super;
+      color: #9ca3af;
+      margin-left: 1px;
+    }
+
+    .guide-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .guide-subheading {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 28px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== Steps ===== */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 0;
+    }
+    .step-item + .step-item {
+      border-top: 1px solid #1f1f1f;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-text {
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.6;
+    }
+    .step-hint {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 3px;
+      font-style: italic;
+    }
+
+    /* ===== Tagline ===== */
+    .guide-tagline {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #3b82f6;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== Video Section ===== */
+    .video-section {
+      margin-top: 24px;
+      background: #111;
+      border: 1px solid #272727;
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+    .video-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .video-label {
+      font-size: 14px;
+      color: #d1d5db;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .video-hint {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+    .btn-video {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+    .btn-video:active {
+      background: #2563eb;
+      transform: scale(0.98);
+    }
+
+    /* ===== Footer ===== */
+    .page-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11px;
+      color: #3f3f3f;
+    }
+    .page-footer span {
+      color: #525252;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Back Button -->
+  <div class="back-row">
+    <a class="back-btn" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      返回验证结果
+    </a>
+  </div>
+
+  <!-- Video Section -->
+  <div class="video-section">
+    <div class="video-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#3b82f6" stroke="none">
+        <polygon points="5,3 19,12 5,21"/>
+      </svg>
+    </div>
+    <div class="video-label">操作视频教程</div>
+    <div class="video-hint">观看完整使用演示，确保正确操作</div>
+    <a class="btn-video" href="https://www.xensuri.com/pages/cold-therapy-support">
+      观看视频
+    </a>
+  </div>
+
+  <!-- Guide Card -->
+  <div class="guide-card">
+    <div class="guide-brand">XENSURI<span class="reg">&reg;</span><span class="dot">.</span></div>
+    <div class="guide-heading">如何使用 XENSURI 冷疗仪？</div>
+    <div class="guide-subheading">简单五步，开启你的康复之旅</div>
+
+    <ul class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-text">将水泵完全浸入冰水中。</div>
+          <div class="step-hint">提示：水位必须高于最低水位。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-text">拉链完全拉上，保冷效果更持久。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-text">在垫子和皮肤之间垫一块干布，并将绑带系紧。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-text">接通电源，设置定时器和流量。</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-text">将冷疗垫放在冷疗仪下方，预防冷凝水流出。</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="guide-tagline">Reclaim Your Recovery!</div>
+  </div>
+
+  <div class="page-footer">
+    由 <span>XenSecure</span> 提供安全验证 &middot; 一次性防伪校验
+  </div>
+
+</div>
+
+</body>
+</html>
